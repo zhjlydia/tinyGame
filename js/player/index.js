@@ -9,7 +9,7 @@ const PLAYER_IMG_SRC = 'images/enemy.png'
 const PLAYER_WIDTH   = 50
 const PLAYER_HEIGHT  = 50
 const g=0.08
-const MOVE_STEP = 10
+const MOVE_STEP = 4
 
 let databus = new DataBus()
 

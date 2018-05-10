@@ -30,7 +30,7 @@ export default class DataBus {
    * 此后不进入帧循环
    */
   removeEnemey(enemy) {
-    debugger;
+    // debugger;
     let temp = this.enemys.shift()
     // this.enemys.splice(this.enemys.indexOf(enemy), 1);
     // enemy.visible = false

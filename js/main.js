@@ -1,7 +1,7 @@
 import Player from './player/index'
 import FloorNormal from './npc/floorNormal'
 import FloorIce from './npc/floorIce'
-import FloorFast from './npc/floorFast'
+import FloorLeft from './npc/floorLeft'
 import FloorBomb from './npc/floorBomb'
 import FloorAttack from './npc/floorAttack'
 import BackGround from './runtime/background'
@@ -71,7 +71,7 @@ export default class Main {
         mstage = FloorIce;
       }
       else if (index <= 3) {
-        mstage = FloorFast;
+        mstage = FloorLeft;
       }
       else if (index <= 4) {
         mstage = FloorBomb;

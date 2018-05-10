@@ -7,7 +7,7 @@ export default class FloorIce extends FloorBase {
     super(ENEMY_IMG_SRC, 100, 20)
   }
 
-  hitRun() {
+  hitRun(target) {
     this.ctrlIndex += 1
     if (this.hit) {
       return;

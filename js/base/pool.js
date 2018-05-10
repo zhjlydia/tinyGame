@@ -40,7 +40,6 @@ export default class Pool {
    * 方便后续继续使用
    */
   recover(name, instance) {
-    debugger;
     this.getPoolBySign(name).push(instance)
   }
 }
