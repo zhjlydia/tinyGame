@@ -116,7 +116,7 @@ export default class Main {
         item.setView(ctx)
       })
 
-    this.player.drawToCanvas(ctx)
+    this.player.onFrame(ctx);
     this.ceiling.drawToCanvas(ctx)
 
     databus.animations.forEach((ani) => {
@@ -154,7 +154,7 @@ export default class Main {
       })
 
     this.enemyGenerate()
-
+    this.player.isJump=true
     this.collisionDetection()
     databus.score = this.bg.renderIndex
     if(this.player.blood<=0){

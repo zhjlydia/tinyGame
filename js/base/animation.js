@@ -15,6 +15,7 @@ export default class Animation extends Sprite {
     super(imgSrc, width, height)
 
     // 当前动画是否播放中
+
     this.isPlaying = false
 
     // 动画是否需要循环播放
@@ -28,12 +29,15 @@ export default class Animation extends Sprite {
 
     // 当前播放的帧
     this.index = -1
+    this.rowIndex=0
 
     // 总帧数
     this.count = 0
 
-    // 帧图片集合
-    this.imgList = []
+    // 帧图片
+    this.spriteImg = ""
+
+    this.frameList=[]
 
     /**
      * 推入到全局动画池里面
@@ -46,33 +50,37 @@ export default class Animation extends Sprite {
    * 初始化帧动画的所有帧
    * 为了简单，只支持一个帧动画
    */
-  initFrames(imgList) {
-    imgList.forEach((imgSrc) => {
+  initFrames(spriteImg,frameList) {
+
       let img = new Image()
-      img.src = imgSrc
+      img.src = spriteImg
 
-      this.imgList.push(img)
-    })
+      this.spriteImg=img
+      this.frameList=frameList
+  }
 
-    this.count = imgList.length
+  setAction(i=0){
+    this.rowIndex=i
+    this.count = this.frameList[i].length
   }
 
   // 将播放中的帧绘制到canvas上
   aniRender(ctx) {
     ctx.drawImage(
-      this.imgList[this.index],
+      this.spriteImg,
+      this.frameList[this.rowIndex][this.index][1]*this.width,
+      this.frameList[this.rowIndex][this.index][0]*this.height,
+      this.width,
+      this.height,
       this.x,
       this.y,
-      this.width  * 1.2,
-      this.height * 1.2
+      this.width,
+      this.height
     )
   }
 
   // 播放预定的帧动画
-  playAnimation(index = 0, loop = false) {
-    // 动画播放的时候精灵图不再展示，播放帧动画的具体帧
-    this.visible   = false
-
+  playAnimation(index = 0, loop = false,space=1) {
     this.isPlaying = true
     this.loop      = loop
 
@@ -81,7 +89,7 @@ export default class Animation extends Sprite {
     if ( this.interval > 0 && this.count ) {
       this[__.timer] = setInterval(
         this.frameLoop.bind(this),
-        this.interval
+        this.interval * space
       )
     }
   }
