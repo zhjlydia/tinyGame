@@ -5,7 +5,7 @@ const screenWidth = window.innerWidth
 const screenHeight = window.innerHeight
 
 // 玩家相关常量设置
-const PLAYER_IMG_SRC = 'images/hero.png'
+const PLAYER_IMG_SRC = 'images/player.png'
 const PLAYER_WIDTH = 40
 const PLAYER_HEIGHT = 50
 const g = 0.1
@@ -25,8 +25,8 @@ export default class Player extends Animation {
     this.speed = 0
     this.blood = 3
     this.moveType = null
-    this.initFrames(PLAYER_IMG_SRC, [[[0,2], [0,3], [0,4], [0,5], [0,6], [0,7], [0,8], [0,9], [0,10], [0,11], [0,12]],
-    [[0,13], [0,14], [0,15], [0,16], [0,17], [0,18], [0,19], [0,20], [0,21], [0,22], [0,23]]])
+    this.initFrames(PLAYER_IMG_SRC, [[[0,2], [0,3], [0,4], [0,5], [0,6], [0,7], [0,8], [0,9]],
+      [[0, 10], [0, 11], [0, 12],[0,13], [0,14], [0,15], [0,16], [0,17]]])
     // 初始化事件监听
     this.initEvent()
   }

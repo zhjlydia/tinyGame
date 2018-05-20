@@ -26,23 +26,27 @@ export default class Main {
 
   restart() {
     databus.reset()
-
     canvas.removeEventListener(
       'touchstart',
       this.touchHandler
     )
-
+    console.log("1");
     this.bg = new BackGround(ctx)
+    console.log("2");
     this.player = new Player()
+    console.log("3");
     this.ceiling = new Celling()
+    console.log("4");
     this.gameinfo = new GameInfo()
+    console.log("5");
     // this.music = new Music()
     this.bindLoop = this.loop.bind(this)
+    console.log("6");
     this.hasEventBind = false
-
+    console.log("7");
     // 清除上一局的动画
     window.cancelAnimationFrame(this.aniId);
-
+    console.log("8");
     this.aniId = window.requestAnimationFrame(
       this.bindLoop,
       canvas
@@ -88,18 +92,18 @@ export default class Main {
 
   // 游戏结束后的触摸事件处理逻辑
   touchEventHandler(e) {
+    
     e.preventDefault()
-
     let x = e.touches[0].clientX
     let y = e.touches[0].clientY
-
     let area = this.gameinfo.btnArea
 
     if (x >= area.startX
       && x <= area.endX
       && y >= area.startY
-      && y <= area.endY)
-      this.restart()
+      && y <= area.endY){
+        this.restart()
+      }   
   }
 
   /**
@@ -165,10 +169,10 @@ export default class Main {
   collisionDetection() {
     for (let i = 0, il = databus.enemys.length; i < il; i++) {
       let floor = databus.enemys[i]
-      if (floor.isCollideWith(this.player)) {
+      if (floor.isTouched(this.player)) {
         this.player.isJump = false;
         this.player.speed = 0;
-        this.player.y = floor.y - 20;
+        this.player.y = floor.y - this.player.height+5;
         floor.hitRun(this.player);
         break
       }

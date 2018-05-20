@@ -38,4 +38,21 @@ export default class FloorBase extends Sprite {
       databus.removeEnemey(this)
     }
   }
+
+  /**
+ * 地板的顶部与player底部接触
+ * @param{Sprite} sp: Sptite的实例
+ */
+  isTouched(sp) {
+    let spX = sp.x + sp.width / 2
+    let spY = sp.y + sp.height
+
+    if (!this.visible || !sp.visible)
+      return false
+
+    return !!(spX >= this.x
+      && spX <= this.x + this.width
+      && spY >= this.y
+      && spY <= this.y + this.height)
+  }
 }
