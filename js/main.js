@@ -30,23 +30,15 @@ export default class Main {
       'touchstart',
       this.touchHandler
     )
-    console.log("1");
     this.bg = new BackGround(ctx)
-    console.log("2");
     this.player = new Player()
-    console.log("3");
     this.ceiling = new Celling()
-    console.log("4");
     this.gameinfo = new GameInfo()
-    console.log("5");
     // this.music = new Music()
     this.bindLoop = this.loop.bind(this)
-    console.log("6");
     this.hasEventBind = false
-    console.log("7");
     // 清除上一局的动画
     window.cancelAnimationFrame(this.aniId);
-    console.log("8");
     this.aniId = window.requestAnimationFrame(
       this.bindLoop,
       canvas
