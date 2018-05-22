@@ -29,6 +29,7 @@ export default class Animation extends Sprite {
 
     // 当前播放的帧
     this.index = -1
+    // 当前播放的动画组
     this.rowIndex=0
 
     // 总帧数
@@ -37,6 +38,7 @@ export default class Animation extends Sprite {
     // 帧图片
     this.spriteImg = ""
 
+    //动画帧（雪碧图位置信息）
     this.frameList=[]
 
     /**

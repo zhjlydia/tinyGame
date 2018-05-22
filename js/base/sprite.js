@@ -17,11 +17,11 @@ export default class Sprite {
 
   /**
    * 将精灵图绘制在canvas上
+   * 支持部分裁剪显示
    */
-  drawToCanvas(ctx,sx,sy) {
+  drawToCanvas(ctx,sx=0,sy=0) {
     if ( !this.visible )
       return
-    if (sx !== undefined && sy !== undefined){
       ctx.drawImage(
         this.img,
         sx || 0,
@@ -33,16 +33,6 @@ export default class Sprite {
         this.width,
         this.height
       )
-    }
-    else{
-      ctx.drawImage(
-        this.img,
-        this.x,
-        this.y,
-        this.width,
-        this.height
-      )
-    }
   }
 
   /**

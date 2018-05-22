@@ -47,13 +47,13 @@ export default class Main {
   initFirstFloor(){
     let floor = new FloorNormal();
     floor.init(2, 100, 300)
-    databus.enemys.push(floor)
+    databus.floors.push(floor)
   }
   /**
    * 随着帧数变化的敌机生成逻辑
    * 帧数取模定义成生成的频率
    */
-  enemyGenerate() {
+  floorGenerate() {
     if (databus.frame===1){
       this.initFirstFloor();
     }
@@ -75,9 +75,9 @@ export default class Main {
       else if (index <= 5) {
         mstage = FloorAttack;
       }
-      let enemy = databus.pool.getItemByClass('enemy', mstage)
-      enemy.init(2)
-      databus.enemys.push(enemy)
+      let floor = databus.pool.getItemByClass('floor', mstage)
+      floor.init(2)
+      databus.floors.push(floor)
     }
   }
 
@@ -107,7 +107,7 @@ export default class Main {
 
     this.bg.render(ctx)
 
-    databus.enemys
+    databus.floors
       .forEach((item) => {
         item.setView(ctx)
       })
@@ -144,12 +144,12 @@ export default class Main {
     if (this.player){
       this.player.update()
     }
-    databus.enemys
+    databus.floors
       .forEach((item) => {
         item.update()
       })
 
-    this.enemyGenerate()
+    this.floorGenerate()
     this.player.isJump=true
     this.collisionDetection()
     databus.score = this.bg.renderIndex
@@ -159,8 +159,8 @@ export default class Main {
   }
   //碰撞检测
   collisionDetection() {
-    for (let i = 0, il = databus.enemys.length; i < il; i++) {
-      let floor = databus.enemys[i]
+    for (let i = 0, il = databus.floors.length; i < il; i++) {
+      let floor = databus.floors[i]
       if (floor.isTouched(this.player)) {
         this.player.isJump = false;
         this.player.speed = 0;

@@ -35,7 +35,7 @@ export default class FloorBase extends Sprite {
     if (this.y < -(window.innerHeight + this.height)){
       this.hit=false
       this.ctrlIndex=0
-      databus.removeEnemey(this)
+      databus.removeFloor(this)
     }
   }
 

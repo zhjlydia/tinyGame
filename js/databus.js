@@ -20,23 +20,18 @@ export default class DataBus {
   reset() {
     this.frame      = 0
     this.score      = 0
-    this.enemys     = []
+    this.floors     = []
     this.animations = []
     this.gameOver   = false
   }
 
   /**
-   * 回收敌人，进入对象池
+   * 回收地板，进入对象池
    * 此后不进入帧循环
    */
-  removeEnemey(enemy) {
-    // debugger;
-    let temp = this.enemys.shift()
-    // this.enemys.splice(this.enemys.indexOf(enemy), 1);
-    // enemy.visible = false
-    // debugger;
+  removeFloor(floor) {
+    let temp = this.floors.shift()
     temp.visible = false
-
-    this.pool.recover('enemy', enemy)
+    this.pool.recover('floor', floor)
   }
 }
