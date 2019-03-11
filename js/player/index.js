@@ -8,7 +8,7 @@ const screenHeight = window.innerHeight
 const PLAYER_IMG_SRC = 'images/player.png'
 const PLAYER_WIDTH = 40
 const PLAYER_HEIGHT = 50
-const g = 0.1
+const g = 0.12
 const MOVE_STEP = 4
 
 let databus = new DataBus()
@@ -43,7 +43,6 @@ export default class Player extends Animation {
   }
   /**
    * 玩家响应手指的触摸事件
-   * 改变战机的位置
    */
   initEvent() {
     canvas.addEventListener('touchstart', ((e) => {
@@ -54,7 +53,7 @@ export default class Player extends Animation {
       this.moveType = x > screenWidth / 2 ? "right" : "left"
       this.setAction(this.moveType==="left"?1:0)
       this.playAnimation(0,true,3)
-      //
+
     }).bind(this))
     canvas.addEventListener('touchend', ((e) => {
       this.moveType = null

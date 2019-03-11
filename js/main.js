@@ -1,9 +1,10 @@
 import Player from './player/index'
-import FloorNormal from './npc/floorNormal'
-import FloorIce from './npc/floorIce'
-import FloorLeft from './npc/floorLeft'
-import FloorBomb from './npc/floorBomb'
-import FloorAttack from './npc/floorAttack'
+import FloorNormal from './npc/floor/floorNormal'
+import FloorIce from './npc/floor/floorIce'
+import FloorLeft from './npc/floor/floorLeft'
+import FloorRight from './npc/floor/floorRight'
+import FloorBounce from './npc/floor/floorBounce'
+import FloorAttack from './npc/floor/floorAttack'
 import BackGround from './runtime/background'
 import Celling from './npc/celling'
 import GameInfo from './runtime/gameinfo'
@@ -20,7 +21,7 @@ export default class Main {
   constructor() {
     // 维护当前requestAnimationFrame的id
     this.aniId = 0
-
+    this.floorType = [FloorNormal, FloorIce, FloorLeft, FloorRight, FloorBounce, FloorAttack]
     this.restart()
   }
 
@@ -34,7 +35,7 @@ export default class Main {
     this.player = new Player()
     this.ceiling = new Celling()
     this.gameinfo = new GameInfo()
-    // this.music = new Music()
+    this.music = new Music()
     this.bindLoop = this.loop.bind(this)
     this.hasEventBind = false
     // 清除上一局的动画
@@ -44,37 +45,22 @@ export default class Main {
       canvas
     )
   }
-  initFirstFloor(){
+  initFirstFloor() {
     let floor = new FloorNormal();
     floor.init(2, 100, 300)
     databus.floors.push(floor)
   }
   /**
-   * 随着帧数变化的敌机生成逻辑
+   * 随着帧数变化的地板生成逻辑
    * 帧数取模定义成生成的频率
    */
   floorGenerate() {
-    if (databus.frame===1){
+    if (databus.frame === 1) {
       this.initFirstFloor();
     }
     if (databus.frame % 60 === 0) {
-      var mstage;
-      var index = Math.random() * 5;
-      if (index <= 1) {
-        mstage = FloorNormal;
-      }
-      else if (index <= 2) {
-        mstage = FloorIce;
-      }
-      else if (index <= 3) {
-        mstage = FloorLeft;
-      }
-      else if (index <= 4) {
-        mstage = FloorBomb;
-      }
-      else if (index <= 5) {
-        mstage = FloorAttack;
-      }
+      var index = Math.ceil(Math.random() * 6 - 1)
+      var mstage = this.floorType[index]
       let floor = databus.pool.getItemByClass('floor', mstage)
       floor.init(2)
       databus.floors.push(floor)
@@ -84,7 +70,7 @@ export default class Main {
 
   // 游戏结束后的触摸事件处理逻辑
   touchEventHandler(e) {
-    
+
     e.preventDefault()
     let x = e.touches[0].clientX
     let y = e.touches[0].clientY
@@ -93,9 +79,9 @@ export default class Main {
     if (x >= area.startX
       && x <= area.endX
       && y >= area.startY
-      && y <= area.endY){
-        this.restart()
-      }   
+      && y <= area.endY) {
+      this.restart()
+    }
   }
 
   /**
@@ -122,6 +108,7 @@ export default class Main {
     })
 
     this.gameinfo.renderGameScore(ctx, databus.score)
+    this.gameinfo.renderBlood(ctx, this.player.blood)
 
     // 游戏结束停止帧循环
     if (databus.gameOver) {
@@ -141,7 +128,7 @@ export default class Main {
       return;
 
     this.bg.update()
-    if (this.player){
+    if (this.player) {
       this.player.update()
     }
     databus.floors
@@ -150,10 +137,10 @@ export default class Main {
       })
 
     this.floorGenerate()
-    this.player.isJump=true
+    this.player.isJump = true
     this.collisionDetection()
     databus.score = this.bg.renderIndex
-    if(this.player.blood<=0){
+    if (this.player.blood <= 0) {
       databus.gameOver = true
     }
   }
@@ -164,13 +151,13 @@ export default class Main {
       if (floor.isTouched(this.player)) {
         this.player.isJump = false;
         this.player.speed = 0;
-        this.player.y = floor.y - this.player.height+5;
+        this.player.y = floor.y - this.player.height + 5;
         floor.hitRun(this.player);
         break
       }
     }
     if (this.ceiling.isCollideWith(this.player)) {
-      this.player.blood -=1;
+      this.player.blood -= 1;
     }
   }
 
@@ -180,7 +167,9 @@ export default class Main {
 
     this.update()
     this.render()
-
+    if (!this.player.blood) {
+      return
+    }
     this.aniId = window.requestAnimationFrame(
       this.bindLoop,
       canvas

@@ -17,7 +17,7 @@ export default class BackGround extends Sprite {
 
     this.top = 0
     this.render(ctx)
-    this.renderIndex=0
+    this.renderIndex=1
     
   }
 
@@ -59,6 +59,14 @@ export default class BackGround extends Sprite {
       this.top,
       screenWidth,
       screenHeight
+    )
+
+    ctx.fillStyle = "#7bbaf4"
+    ctx.font = "50px Arial"
+    ctx.fillText(
+      this.renderIndex,
+      screenWidth / 2 - 10,
+      screenHeight + this.top,
     )
   }
 }

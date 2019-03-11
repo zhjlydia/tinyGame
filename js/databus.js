@@ -21,6 +21,7 @@ export default class DataBus {
     this.frame      = 0
     this.score      = 0
     this.floors     = []
+    this.items      = []
     this.animations = []
     this.gameOver   = false
   }
@@ -33,5 +34,11 @@ export default class DataBus {
     let temp = this.floors.shift()
     temp.visible = false
     this.pool.recover('floor', floor)
+  }
+
+  removeItem(item){
+    let temp = this.items.shift()
+    temp.visible = false
+    this.pool.recover('item', item)
   }
 }
