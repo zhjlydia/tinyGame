@@ -14,26 +14,18 @@ export default class Music {
     this.bgmAudio.loop = true
     this.bgmAudio.src  = 'audio/bgm.mp3'
 
-    this.shootAudio     = new Audio()
-    this.shootAudio.src = 'audio/bullet.mp3'
+    this.touchAudio     = new Audio()
+    this.touchAudio.src = 'audio/touch.mp3'
 
-    this.boomAudio     = new Audio()
-    this.boomAudio.src = 'audio/boom.mp3'
-
-    this.playBgm()
+    // this.playBgm()
   }
 
   playBgm() {
     this.bgmAudio.play()
   }
 
-  playShoot() {
-    this.shootAudio.currentTime = 0
-    this.shootAudio.play()
-  }
-
-  playExplosion() {
-    this.boomAudio.currentTime = 0
-    this.boomAudio.play()
+  playTouch() {
+    this.touchAudio.currentTime = 0
+    this.touchAudio.play()
   }
 }

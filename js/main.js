@@ -152,7 +152,10 @@ export default class Main {
         this.player.isJump = false;
         this.player.speed = 0;
         this.player.y = floor.y - this.player.height + 5;
-        floor.hitRun(this.player);
+        if (!floor.hit) {
+          this.music.playTouch();
+        }
+        floor.hitRun(this.player);  
         break
       }
     }
