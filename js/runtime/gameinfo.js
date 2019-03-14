@@ -23,14 +23,14 @@ export default class GameInfo {
     drawRoundRect(ctx, screenWidth / 2 - 150, screenHeight / 2 - 100,300,200,10,'rgba(244,243,123,0.9)','fill');
     drawRoundRect(ctx, screenWidth / 2 - 152, screenHeight / 2 - 102, 304, 204, 10, '#35398c', 'stroke');
     ctx.drawImage(atlas, 0, 0, 320, 66, screenWidth / 2 - 140, screenHeight / 2 - 80, 280, 50)
-
+    ctx.textAlign='center'
     ctx.fillStyle = "#35398c"
     ctx.font    = "18px Arial"
 
 
     ctx.fillText(
       'Score: ' + score,
-      screenWidth / 2 - 40,
+      screenWidth / 2,
       screenHeight / 2
     )
 
@@ -39,8 +39,8 @@ export default class GameInfo {
 
     ctx.fillStyle = "#fff"
     ctx.fillText(
-      '重 新 开 始',
-      screenWidth / 2-43,
+      '重新开始',
+      screenWidth / 2,
       screenHeight / 2+45
     )
 

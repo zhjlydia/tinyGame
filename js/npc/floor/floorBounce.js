@@ -10,7 +10,6 @@ export default class FloorBounce extends FloorBase {
     target.y-=15
     target.speed=-4
     target.isJump=true
-    this.hit = true;
   }
   setView(ctx) {
     this.ctrlIndex +=1

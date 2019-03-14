@@ -17,7 +17,7 @@ export default class Music {
     this.touchAudio     = new Audio()
     this.touchAudio.src = 'audio/touch.mp3'
 
-    // this.playBgm()
+    this.playBgm()
   }
 
   playBgm() {

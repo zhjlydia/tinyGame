@@ -8,7 +8,7 @@ const screenHeight = window.innerHeight
 const PLAYER_IMG_SRC = 'images/player.png'
 const PLAYER_WIDTH = 40
 const PLAYER_HEIGHT = 50
-const g = 0.12
+const g = 0.15
 const MOVE_STEP = 4
 
 let databus = new DataBus()
@@ -17,7 +17,7 @@ export default class Player extends Animation {
   constructor() {
     super(PLAYER_IMG_SRC, PLAYER_WIDTH, PLAYER_HEIGHT)
 
-    // 玩家默认处于屏幕顶部居中位置
+    // 玩家默认位置
     this.x = screenWidth / 2 - this.width / 2
     this.y = this.height + 30
 

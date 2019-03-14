@@ -12,6 +12,10 @@ import Music from './runtime/music'
 import DataBus from './databus'
 
 let ctx = canvas.getContext('2d')
+canvas.width = canvas.width * window.devicePixelRatio
+canvas.height = canvas.height * window.devicePixelRatio
+ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+
 let databus = new DataBus()
 
 /**
@@ -26,6 +30,7 @@ export default class Main {
   }
 
   restart() {
+    console.log(window.devicePixelRatio)
     databus.reset()
     canvas.removeEventListener(
       'touchstart',

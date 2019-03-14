@@ -13,7 +13,6 @@ export default class FloorRight extends FloorBase {
     this.hit = true;
   }
   setView(ctx) {
-    console.log("right");
     this.drawToCanvas(ctx, 0, 0)
   }
 }

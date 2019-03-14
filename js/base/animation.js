@@ -29,6 +29,7 @@ export default class Animation extends Sprite {
 
     // 当前播放的帧
     this.index = -1
+    
     // 当前播放的动画组
     this.rowIndex=0
 
